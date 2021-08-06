@@ -1,0 +1,21 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+#canvas_container {
+  position: absolute;
+  left: 50%;
+  top:10%;
+
+}
+
+#text_container {
+  position: relative;
+  width:500px;
+  left: 50%;
+  margin-left: -250px;
+}
