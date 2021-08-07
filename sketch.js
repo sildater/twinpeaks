@@ -129,9 +129,10 @@ destination_names = [
 
 function send_messages(a,b,c) {
   // value
-  midioutput.send( [0xB0, 0x63, a] ); 
-  midioutput.send( [0xB0, 0x62, b] ); 
-  midioutput.send( [0xB0, 0x06, c] ); 
+  let cc = 175 + midi_channel;
+  midioutput.send( [cc, 0x63, a] ); 
+  midioutput.send( [cc, 0x62, b] ); 
+  midioutput.send( [cc, 0x06, c] ); 
   //midioutput.send( [0xB0, 0x26, 0] ); 
 }
 
