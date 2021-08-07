@@ -9,7 +9,7 @@ let interval;
 let midi_selection;
 let midi_channel_selection;
 let midi_channel = 1
-
+let bright_color; 
 /*
 MIDI STUFF
 */
@@ -28,6 +28,8 @@ function onMIDISuccess( midiAccess ) {
   console.log( "MIDI ready!" , midioutput);
   midi_is = true;
   midi_selection = createSelect()
+  midi_selection.style('color', bright_color);
+  midi_selection.style('background-color', color(20,20,20));
   midi_selection.parent("canvas");
   midi_selection.position(width-150, height-150);
   for (let j = 0; j<midi_names.length; j++) {
@@ -35,7 +37,9 @@ function onMIDISuccess( midiAccess ) {
   }
   midi_selection.changed(choose_midi);
 
-  midi_channel_selection = createSelect()
+  midi_channel_selection = createSelect();
+  midi_channel_selection.style('color', bright_color);
+  midi_channel_selection.style('background-color', color(20,20,20));
   midi_channel_selection.parent("canvas");
   midi_channel_selection.position(width-150, height-100);
   for (let j = 1; j<17; j++) {
@@ -184,19 +188,19 @@ class ColumnEntry {
   display() {
     if (this.marked) {
       strokeWeight(3);
+      stroke(color(154,25,0))
     }
     else {
       strokeWeight(1);
+      stroke(bright_color)
     }
     fill(this.color)
     rect(this.x, this.y, 20)
 
-    fill(250);
+    fill(bright_color);
     rect(this.x+25,this.y, 150, 20)
     fill(this.color);
-
-
-    rect(this.x+100,this.y+3, (this.depth-64)*75/65,14)
+    rect(this.x+100,this.y, (this.depth-64)*75/65,20)
   }
 
   change_depth(val) {
@@ -249,7 +253,6 @@ class SecondarySource {
     this.x = (destination_names.length+1)*25; 
     this.compute_position(z);
     this.used_color = color(255,9,56);
-    this.unused_color = color(250);
     this.marked = false
    }
 
@@ -260,11 +263,13 @@ class SecondarySource {
   display() {
     if (this.marked) {
       fill(this.used_color)
+      stroke(color(154,25,0))
       strokeWeight(3);
     }
     else {
-      fill(this.unused_color)
+      fill(bright_color)
       strokeWeight(1);
+      stroke(bright_color)
     }
     rect(this.x, this.y, 20)
   }
@@ -286,7 +291,7 @@ class MatrixEntry {
     this.in_val = y;
     this.out_val = x;
     this.marked = false;
-    this.color = color(250);
+    this.color = bright_color;
     this.mod_ref = null;
     
    }
@@ -299,6 +304,7 @@ class MatrixEntry {
   display() {
     if (this.marked) {
       strokeWeight(3);
+      stroke(color(154,25,0))
       let extra = -60;
       line(this.x+20, extra, this.x+20, this.y)
       line(extra, this.y+20, this.x, this.y+20)
@@ -307,7 +313,10 @@ class MatrixEntry {
     }
     else {
       strokeWeight(1);
+      stroke(bright_color)
     }
+
+    
     fill(this.color)
     rect(this.x, this.y, 20)
   }
@@ -318,7 +327,7 @@ class MatrixEntry {
     }
   }*/
   rebase() {
-    this.color = color(250);
+    this.color = bright_color;
     this.marked = false;
     this.mod_ref = null;
   }
@@ -335,7 +344,7 @@ function setup() {
   
   canvas.parent("canvas")
   select('#canvas_container').style("margin-left", "-"+(width/2).toString()+"px");
-  
+  bright_color = color(220);
 
   for (let i = 0; i<source_names.length; i++) {
     let local_row = []
@@ -361,9 +370,9 @@ function setup() {
 
 
 function draw() {
-  background(220);
-  stroke(0)
-  fill(0)
+  background(10);
+  stroke(bright_color)
+  fill(bright_color)
   textAlign(RIGHT);
   for(var i = 0; i < source_names.length; i++){
     
@@ -382,8 +391,8 @@ function draw() {
   text("DEPTH", 0, 16+(destination_names.length+5.5)*25)
 
   rotate(HALF_PI);
-  stroke(0);
-  fill(250)
+  stroke(bright_color);
+  fill(bright_color)
   for(var i = 0; i < Matrix.length; i++){
     for(var j = 0; j < Matrix[i].length; j++){
     Matrix[i][j].display();

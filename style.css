@@ -1,6 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: rgb(13,13,13);
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif; 
 }
 canvas {
   display: block;
@@ -18,4 +20,8 @@ canvas {
   width:500px;
   left: 50%;
   margin-left: -250px;
+  color: rgb(220,220,220);
+}
+a {
+  color: rgb(154,25,0);
 }
