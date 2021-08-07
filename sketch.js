@@ -220,6 +220,7 @@ class ColumnEntry {
     let matrix_entry = Matrix[this.in_val][this.out_val]
     matrix_entry.color = this.color;
     matrix_entry.marked =  true;
+    matrix_entry.mod_ref =  this.z;
     if (midioutput) {
       this.send_message();
     }
@@ -230,6 +231,8 @@ class ColumnEntry {
     let matrix_entry = Matrix[this.in_val][this.out_val]
     matrix_entry.color = this.color;
     matrix_entry.marked =  false;
+    matrix_entry.mod_ref =  this.z;
+    
     
 
   }
@@ -284,6 +287,8 @@ class MatrixEntry {
     this.out_val = x;
     this.marked = false;
     this.color = color(250);
+    this.mod_ref = null;
+    
    }
 
   compute_position(x,y) {
@@ -294,8 +299,11 @@ class MatrixEntry {
   display() {
     if (this.marked) {
       strokeWeight(3);
-      line(this.x+20, -30, this.x+20, this.y)
-      line(-30, this.y+20, this.x, this.y+20)
+      let extra = -60;
+      line(this.x+20, extra, this.x+20, this.y)
+      line(extra, this.y+20, this.x, this.y+20)
+      line(this.x, extra, this.x, this.y)
+      line(extra, this.y, this.x, this.y)
     }
     else {
       strokeWeight(1);
@@ -312,6 +320,7 @@ class MatrixEntry {
   rebase() {
     this.color = color(250);
     this.marked = false;
+    this.mod_ref = null;
   }
 
 }
@@ -481,10 +490,20 @@ function mousePressed() {
 
 
   if (x>=0 && x <=25*destination_names.length && y>= 0 && y <= 25*source_names.length) {
+
     let new_in = Math.floor(y/25);
     let new_out = Math.floor(x/25);
-    MatrixMods[marked_mod_entry].in_val = new_in;
-    MatrixMods[marked_mod_entry].out_val = new_out;
+    if (mouseButton === RIGHT) {
+      let matrix_entry = Matrix[new_in][new_out]
+      if (matrix_entry.mod_ref) {
+        marked_mod_entry = matrix_entry.mod_ref-1;
+      }
+    }
+    else {
+      MatrixMods[marked_mod_entry].in_val = new_in;
+      MatrixMods[marked_mod_entry].out_val = new_out;
+    }
+    
   }
   else if (x>=25*(destination_names.length+1) && x <=25*(destination_names.length+2) && y>= 0 && y <= 25*source_names.length) {
     let new_in2 = Math.floor(y/25);

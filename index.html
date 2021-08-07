@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
   </head>
-  <body>
+  <body oncontextmenu="return false;">
     <div id="canvas_container">
     <div id="canvas"></div>
     <script src="sketch.js"></script>
@@ -24,14 +24,15 @@
         If you don't see any dropdown menus, your browser most likely doesn't support MIDI.</p>
         <p>
         Let's change some values in the matrix!
-        Click on a Mod Slot in the colored column on the right to activate this slot.
+        Click on a Mod Slot in the colored column on the right to select this slot.
         To the right of the Mod Slots you see their corresponding Depth parameters, 
         click on a slider and drag horizontally to change its value.
 
       </p>
       <p>
         Click somewhere in the main matrix to change the source (listed on the left) 
-        and destination (listed on top) of currently selected mod slot.
+        and destination (listed on top) of the currently selected mod slot.
+        Conversely, if you right-click on a colored matrix entry, you select the corresponding mod slot.
         Directly to the left of the mod slots (colored column) you find the secondary sources, 
         click one to activate it for the currently selected mod slot.
       </p>
@@ -40,7 +41,7 @@
         If you open the "mod" menu on your instrument you can see the changes made.
         It's not (yet) possible to load a mod matrix state from the instrument or download a state, this page always starts with blank slate.
         Save your creation on your Summit/Peak!
-        If you want to work with two different matrices for the two timbres on the Summit just open this page in another tab and choose the appropriate MIDI channels.
+        If you want to work with two different mod matrices for the two timbres of the Summit just open this page again in another tab and choose the appropriate MIDI channels.
       </p>
 
       <p>
